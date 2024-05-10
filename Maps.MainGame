@@ -1,0 +1,76 @@
+import pygame
+import sys
+from pygame.locals import QUIT as qt
+pygame.font.init()
+
+import random,math
+
+#define colours
+BLACK=(0,0,0)
+WHITE=(255,255,255)
+RED=(255,0,0)
+GREEN=(0,255,0)
+BLUE=(0,0,255)
+YELLOW=(255,255,0)
+CYAN=(0,255,255)
+MAGENTA=(255,0,255)
+width=1280
+height=720
+menu="game"
+size=(width, height)
+#map rule of thumb
+#      xp=(playerLevel*8)+random.randint(1,7)
+#     (dimentions=3*np.log(labyrinthLevel,2))
+#implementing classes
+class mob(pygame.sprite.Sprite):
+  health=100
+  damage=20
+  speed=100
+  def __init__(self,x,y,color):
+    super().__init__()
+    self.image=pygame.Surface([width,height])
+    self.image.fill(color)
+    self.rect=self.image.get_rect()
+    
+class Player(pygame.sprite.Sprite):
+  health=5
+  lives=5
+  def __init__(self,color,width,height,speed_x,speed_y):
+      super().__init__()
+      self.image=pygame.Surface([width,height])
+      self.image.fill(color)
+      self.rect=self.image.get_rect()
+      self.width=width
+      self.height=height
+      self.speed_x=speed_x
+      self.speed_y=speed_y
+      #self.rect.x=centre of starting square
+      #self.rect.y=centre of starting square
+  def update(self):
+      self.rect.x = self.rect.x + self.speed_x
+      if self.speed_x == -3:
+          self.rect.x += 3 
+      if self.speed_x == 3:
+          self.rect.x -= 3
+      self.rect.y = self.rect.y + self.speed_y        
+      if self.speed_y == -3:
+          self.rect.y += 3 
+      if self.speed_y == 3:
+          self.rect.y -= 3
+        
+pygame.init()
+clock=pygame.time.Clock()
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption('Labyrinth of Chaos')
+while True:
+   for event in pygame.event.get():
+       if event.type == qt:
+           pygame.quit()
+           sys.exit()
+
+
+   screen.fill(BLACK)
+   #all print options go here
+   pygame.display.flip()
+   clock.tick (60) 
+   pygame.display.update()
