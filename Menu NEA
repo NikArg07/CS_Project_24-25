@@ -1,0 +1,43 @@
+import pygame
+import sys
+from pygame import font
+from pygame.locals import QUIT
+
+BLACK = (0, 0, 0)
+WHITE=(255,255,255)
+RED=(255,0,0)
+GREEN=(0,255,0)
+BLUE=(0,0,255)
+YELLOW=(255,255,0)
+CYAN=(0,255,255)
+MAGENTA=(255,0,255)
+size=(1280,720)
+
+font = pygame.font.Font('Arial_Bold.ttf', 16)
+Menu_Write=font.render("MENU",True,WHITE)
+New_Save=font.render("New Save",True,WHITE)
+Last_Save=font.render("Last Save",True,WHITE)
+Menu_Print=Menu_Write.get_rect(left=(80,120))
+New_Print=New_Save.get_rect(left=(80,360))
+Last_Print=Last_Save.get_rect(left=(80,600))
+
+pygame.init()
+clock=pygame.time.Clock()
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption('The Labyrinth of Chaos')
+while True:
+   for event in pygame.event.get():
+       if event.type == QUIT:
+           pygame.quit()
+           sys.exit()
+
+       screen.fill(BLACK)
+       #all print options go here
+       pygame.draw.line(screen,WHITE,[200,0],[200,720],4)
+       pygame.draw.line(screen,WHITE,[0,120],[200,120],4)
+       pygame.draw.line(screen,WHITE,[0,240],[200,120],4)
+       screen.blit(Menu_Write,Menu_Print)
+       screen.blit(New_Save,New_Print)
+       screen.blit(Last_Save,Last_Print)
+       pygame.display.flip()
+   pygame.display.update()
