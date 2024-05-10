@@ -1,0 +1,165 @@
+from types import new_class
+import pygame, sys
+from pygame.locals import QUIT
+
+BLACK=(0,0,0)
+WHITE=(255,255,255)
+RED=(255,0,0)
+GREEN=(0,255,0)
+BLUE=(0,0,255)
+YELLOW=(255,255,0)
+CYAN=(0,255,255)
+MAGENTA=(255,0,255)
+width=1280
+height=720 
+mode="inventory"
+
+Inventory=[]
+def showInventory(Inventory):
+ f= open("Inventory{save file number}.txt")
+ if f.read(1) == 1:
+  print("file occupied")
+  question=input("1.Open inventory n\2.Replace items")
+  if question == 1:
+    print("opening")
+    class Player(pygame.sprite.Sprite):
+      health=5
+      lives=5
+      def __init__(self,color,width,height,speed_x,speed_y,str,agi,dura,sta):
+          super().__init__()
+          self.image=pygame.Surface([width,height])
+          self.image.fill(color)
+          self.rect=self.image.get_rect()
+          self.width=width
+          self.height=height
+          self.speed_x=speed_x
+          self.speed_y=speed_y
+          self.str=str
+          self.agi=agi
+          self.dura=dura
+          self.sta=sta
+          #self.rect.x=centre of starting square
+          #self.rect.y=centre of starting square
+      def update(self):
+          self.rect.x = self.rect.x + self.speed_x
+          if self.speed_x == -20:
+              self.rect.x += 20 
+          if self.speed_x == 20:
+              self.rect.x -= 20
+          self.rect.y = self.rect.y + self.speed_y        
+          if self.speed_y == -20:
+              self.rect.y += 20 
+          if self.speed_y == 20:
+              self.rect.y -= 20
+      def stats(self):
+         strength=player.str
+         speed=player.spd
+         hp=player.hp
+    player.str = f.read(2)
+    player.hp = f.read(3)
+    player.dex = f.read(4)
+    player.agi = f.read(5)
+    player.sta = f.read(6)
+    player.free = f.read(7)
+    player.inventory[0,0] = f.read(8)
+    player.inventory[0,1] = f.read(9)
+    player.inventory[1,0] = f.read(10)
+    player.inventory[1,1] = f.read(11)
+    player.inventory[2,0] = f.read(12)
+    player.inventory[2,1] = f.read(13)
+    player.inventory[3,0] = f.read(14)
+    player.inventory[3,1] = f.read(15)
+    player.inventory[4,0] = f.read(16)
+    player.inventory[4,1] = f.read(17)
+    player.inventory[5,0] = f.read(18)
+    player.inventory[5,1] = f.read(19)
+    player.inventory[6,0] = f.read(20)
+    player.inventory[6,1] = f.read(21)
+    player.inventory[7,0] = f.read(22)
+    player.inventory[7,1] = f.read(23)
+    player.inventory[8,0] = f.read(24)
+    player.inventory[8,1] = f.read(25)
+    player.inventory[9,0] = f.read(26)
+    player.inventory[9,1] = f.read(27)
+    Player.Level
+  else:
+    question2=str(input("Are you sure you want to replace?")).lower
+    if question2 == "yes":
+  
+
+
+
+
+#for inventory mode
+
+
+
+
+#for stats and level
+
+
+#printing the overlay for the screen
+def lines():
+  #print horizontal and vertical lines
+  pygame.draw.line(screen,WHITE,[360,0],[360,720],5)
+  pygame.draw.line(screen,WHITE,[720,0],[720,720],5)
+  pygame.draw.line(screen,WHITE,[1080,0],[1080,720],5)
+  pygame.draw.line(screen,WHITE,[0,180],[1080,180],5)
+  pygame.draw.line(screen,WHITE,[0,360],[1080,360],5)
+  pygame.draw.line(screen,WHITE,[0,540],[1080,540],5)
+  #print the screen border
+  pygame.draw.line(screen,WHITE,[0,0],[0,720],5)
+  pygame.draw.line(screen,WHITE,[0,0],[1280,0],5)
+  pygame.draw.line(screen,WHITE,[1280,0],[1280,720],5)
+  pygame.draw.line(screen,WHITE,[0,720],[1280,720],5)
+
+pygame.init()
+clock=pygame.time.Clock()
+size=(width,height)
+screen=pygame.display.set_mode(size)
+pygame.display.set_caption('The Labyrinth of Chaos')
+while True:
+   for event in pygame.event.get():
+    if event.type == QUIT:
+     pygame.quit()
+     sys.exit()
+
+
+    screen.fill(BLACK)
+    #declaring the text layout
+    if mode == "Inventory" :
+       strength_text=("Str:{}.format{player.strength}")
+       agility_text=("Agl:{}.format{player.agility}")
+       durability_text=("Dura:{}.format{player.durability}")
+       health_text=("Hp:{}.format{player.hp}")
+       free_text=("Free Stats:{}.format{player.free}")
+       font = pygame.font.Font('Arial_Bold.ttf', 16)
+       Stats=font.render("Stats:",True,WHITE)
+       Strength=font.render(strength_text,True,WHITE)
+       Agility=font.render(agility_text,True,WHITE)
+       Durability=font.render(durability_text,True,WHITE)
+       Health=font.render(health_text,True,WHITE)
+       Free=font.render(free_text,True,WHITE)
+       Str_display=Strength.get_rect(left=(80,120))
+       Agl_display=Agility.get_rect(left=(80,240))
+       Dura_display=Durability.get_rect(left=(80,360))
+       Hp_display=Health.get_rect(left=(80,480))
+       Free_display=Free.get_rect(left=(80,600))
+        
+    screen.blit(Stats, (80, 80))
+    screen.blit(Str_display, (80, 120))
+    screen.blit(Agl_display, (80, 240))
+    screen.blit(Dura_display, (80, 360))
+    screen.blit(Hp_display, (80, 480))
+    screen.blit(Free_display, (80, 600))
+    pygame.display.flip()
+    clock.tick (60) 
+    pygame.quit()
+
+ #def drop(item):
+ #  print("dropped")
+ #def show(list):
+ #  print(list)
+# InventoryOpen=True
+# while InventoryOpen == True:
+#   show(myInventory)
